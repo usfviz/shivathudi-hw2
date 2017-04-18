@@ -73,13 +73,13 @@ server <- function(input, output) {
       mutate(opacity = ifelse(Region==plot_reg() | plot_reg()=="All", 0.8, 0.2))})
   
   df_sub %>% 
-    ggvis(~Life.Expectancy, ~Fertility.Rate, fill = ~Region, key := ~Country.Name, stroke := 'black', strokeWidth := 0.5) %>%
+    ggvis(~Life.Expectancy, ~Fertility.Rate, fill = ~Region, key := ~Country.Name, stroke := 'black', strokeWidth := 0.25) %>%
     add_tooltip(all_values, "hover") %>%
     layer_points(size := ~radius, fillOpacity := ~opacity, strokeOpacity := ~opacity, size.hover := ~radius+100, 
                  strokeWidth.hover := 1.0, fillOpacity.hover := 1.0, strokeOpacity.hover := 1.0) %>%
     add_axis("x", title="Life Expectancy") %>%
     add_axis("y", title="Fertility Rate") %>%
-    scale_numeric("x", domain = c(20, 85), nice = FALSE) %>%
+    scale_numeric("x", domain = c(10, 90), nice = FALSE) %>%
     scale_numeric("y", domain = c(0, 9), nice = FALSE) %>%
     bind_shiny("plot", "plot_ui")
 }
